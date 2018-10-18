@@ -5,6 +5,7 @@ import org.hibernate.cfg.Configuration;
 import ru.schepin.hiberntate.dao.CarDao;
 import ru.schepin.hiberntate.dao.Dao;
 import ru.schepin.hiberntate.model.Car;
+import ru.schepin.hiberntate.model.Engine;
 import ru.schepin.hiberntate.model.User;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public class app {
             Dao<Car, Integer> carDao = new CarDao(sessionFactory);
 
 
-          //    save(carDao);
+              save(carDao);
 
 //            Car car = carDao.getByKey(4);
 //            System.out.println(car);
@@ -41,20 +42,19 @@ public class app {
         user.setName("Schepin Dmitriy");
         user.setAge(32);
         user.setDate(new Date(1986, 8, 13));
-        user.setId(1);
+        user.setId(25);
 
         Car mmcL200 = new Car();
         mmcL200.setMarka("MMC");
         mmcL200.setModel("L200");
+        mmcL200.setId(25);
 
-        Car skodaOctavia = new Car();
-        skodaOctavia.setMarka("Skoda");
-        skodaOctavia.setModel("Octavia");
+        Engine k56456 = new Engine(5, "K56456");
+
 
         mmcL200.setUser(user);
-        skodaOctavia.setUser(user);
-
-        carDao.save(skodaOctavia);
+        mmcL200.setEngine(k56456);
         carDao.save(mmcL200);
+        System.out.println(carDao.getByKey(25));
     }
 }

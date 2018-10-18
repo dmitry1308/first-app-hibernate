@@ -28,6 +28,7 @@ public class CarDao implements Dao<Car, Integer> {
             Car car = session.get(Car.class, id);
             if (car != null) {
                 Hibernate.initialize(car.getUser());
+                Hibernate.initialize(car.getEngine());
             }
 
             return car != null ? car : new Car();

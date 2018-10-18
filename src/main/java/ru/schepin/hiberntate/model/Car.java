@@ -13,6 +13,15 @@ public class Car {
     private String marka;
     private String Model;
     private User user;
+    private Engine engine;
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
 
     public Car(int id, String marka, String model, User user) {
         this.id = id;

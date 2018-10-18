@@ -13,6 +13,10 @@
            <many-to-one name="user" column="user_id"
                         class="ru.schepin.hiberntate.model.User"
                         cascade="save-update"/>
+
+        <many-to-one name="engine" column="engine_id"
+                     class="ru.schepin.hiberntate.model.Engine"
+                     cascade="save-update"/>
     </class>
 </hibernate-mapping>
 

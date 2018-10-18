@@ -51,6 +51,5 @@ public class CarDaoTest {
 
         Car car1 = carDao.getByKey(68);
         Assert.assertEquals(car, car1);
-
     }
 }
