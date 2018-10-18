@@ -1,2 +1,1 @@
- Task 2: many to one.
- (Отношение: многие машины к одному водителю)
+ Task 3: many to many.

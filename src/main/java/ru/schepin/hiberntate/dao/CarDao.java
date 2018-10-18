@@ -1,6 +1,5 @@
 package ru.schepin.hiberntate.dao;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.schepin.hiberntate.model.Car;
@@ -26,10 +25,6 @@ public class CarDao implements Dao<Car, Integer> {
     public Car getByKey(Integer id) {
         try (Session session = sessionFactory.openSession()) {
             Car car = session.get(Car.class, id);
-            if (car != null) {
-                Hibernate.initialize(car.getUser());
-            }
-
             return car != null ? car : new Car();
         }
     }

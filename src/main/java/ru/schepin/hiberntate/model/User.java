@@ -4,55 +4,32 @@ package ru.schepin.hiberntate.model;
 import lombok.*;
 
 import java.util.Date;
+import java.util.Set;
 
 
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = "cars")
 public class User {
+
+    @Getter
+    @Setter
     private int id;
+
+    @Getter
+    @Setter
     private String name;
+
+    @Getter
+    @Setter
     private int age;
+
+    @Getter
+    @Setter
     private Date date;
 
-    public User(String name, int age, Date date) {
-        this.name = name;
-        this.age = age;
-        this.date = date;
-    }
+    @Getter
+    @Setter
+    private Set<Car> cars;
 
-    public User() {
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
