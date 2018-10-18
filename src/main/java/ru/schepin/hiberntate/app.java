@@ -2,8 +2,9 @@ package ru.schepin.hiberntate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import ru.schepin.hiberntate.dao.CarDao;
 import ru.schepin.hiberntate.dao.Dao;
-import ru.schepin.hiberntate.dao.UserDao;
+import ru.schepin.hiberntate.model.Car;
 import ru.schepin.hiberntate.model.User;
 
 import java.util.Date;
@@ -13,11 +14,19 @@ public class app {
         SessionFactory sessionFactory = null;
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
-            Dao<User, Integer> userDao = new UserDao(sessionFactory);
+            Dao<Car, Integer> carDao = new CarDao(sessionFactory);
 
-            // save(userDao);
-            // User user = getByKey(userDao);
-            delete(userDao);
+
+          //    save(carDao);
+
+//            Car car = carDao.getByKey(4);
+//            System.out.println(car);
+//
+//            car.getUser().setAge(33);
+//            carDao.update(car);
+//            System.out.println(carDao.getByKey(3));
+//            carDao.delete(car);
+
 
         } finally {
             if (sessionFactory != null) {
@@ -26,22 +35,26 @@ public class app {
         }
     }
 
-    private static User getByKey(Dao<User, Integer> userDao) {
-        return userDao.getByKey(4);
-    }
 
-    private static void delete(Dao<User, Integer> userDao) {
-        User user = getByKey(userDao);
-        userDao.delete(user);
-    }
-
-    private static void save(Dao<User, Integer> userDao) {
+    private static void save(Dao<Car, Integer> carDao) {
         User user = new User();
-        user.setName("Vargas Ilya");
-        user.setAge(33);
+        user.setName("Schepin Dmitriy");
+        user.setAge(32);
+        user.setDate(new Date(1986, 8, 13));
+        user.setId(1);
 
-        user.setDate(new Date(1985, 5, 1));
+        Car mmcL200 = new Car();
+        mmcL200.setMarka("MMC");
+        mmcL200.setModel("L200");
 
-        userDao.save(user);
+        Car skodaOctavia = new Car();
+        skodaOctavia.setMarka("Skoda");
+        skodaOctavia.setModel("Octavia");
+
+        mmcL200.setUser(user);
+        skodaOctavia.setUser(user);
+
+        carDao.save(skodaOctavia);
+        carDao.save(mmcL200);
     }
 }

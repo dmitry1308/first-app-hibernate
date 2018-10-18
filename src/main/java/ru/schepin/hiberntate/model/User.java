@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.util.Date;
 
-@NoArgsConstructor
+
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
@@ -14,6 +14,15 @@ public class User {
     private String name;
     private int age;
     private Date date;
+
+    public User(String name, int age, Date date) {
+        this.name = name;
+        this.age = age;
+        this.date = date;
+    }
+
+    public User() {
+    }
 
     public int getId() {
         return id;

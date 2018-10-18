@@ -1,17 +1,14 @@
-create database first_app_hibernate;
-
 use first_app_hibernate;
 
-create table users
-    (
-        id int auto_increment primary key,
-        name varchar(50),
-        age int,
-        birthday date
+create table cars
+	(
+		id int auto_increment primary key,
+        marka varchar(15),
+        model varchar(15),
+        user_id int
 	);
 
-insert users (name,age,birthday) values
-		('Schepin  Dmitriy',32,'1986.08.13'),
-		('Hohlov Roman',32,'1985.07.05');
+alter table cars add constraint ix_user_id foreign key(user_id) references users(id);
+
 
 -- drop database first_app_hibernate;

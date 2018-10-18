@@ -11,6 +11,7 @@
         <property name="show_sql">true</property>
 
         <mapping resource="ru/schepin/hibernate/User.hbm.xml"/>
+        <mapping resource="ru/schepin/hibernate/Car.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
 
