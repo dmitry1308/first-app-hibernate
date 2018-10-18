@@ -1,14 +1,26 @@
-use first_app_hibernate;
+drop DATABASE one_to_many_lesson;
 
-create table cars
-	(
-		id int auto_increment primary key,
-        marka varchar(15),
-        model varchar(15),
-        user_id int
-	);
+CREATE DATABASE one_to_many_lesson;
 
-alter table cars add constraint ix_user_id foreign key(user_id) references users(id);
+use one_to_many_lesson;
 
 
--- drop database first_app_hibernate;
+CREATE TABLE IF NOT EXISTS cars (
+  id   int auto_increment PRIMARY KEY ,
+  cost INT,
+  mark VARCHAR(25)
+);
+
+INSERT INTO cars (mark, cost) VALUES ('ford', 100000);
+INSERT INTO cars (mark, cost) VALUES ('ford', 10984673);
+INSERT INTO cars (mark, cost) VALUES ('mazda', 10984673);
+
+
+CREATE TABLE IF NOT EXISTS engines (
+  id       int PRIMARY KEY auto_increment,
+  name     VARCHAR(25) NOT NULL,
+  power    int     NOT NULL,
+  car_mark VARCHAR(25)
+);
+
+INSERT INTO engines (name, power, car_mark) VALUES ('super-engine', 10000, 'ford');

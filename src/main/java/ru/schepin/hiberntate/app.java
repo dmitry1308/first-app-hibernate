@@ -2,59 +2,82 @@ package ru.schepin.hiberntate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.schepin.hiberntate.dao.CarDao;
 import ru.schepin.hiberntate.dao.Dao;
+import ru.schepin.hiberntate.dao.EngineDAO;
 import ru.schepin.hiberntate.model.Car;
-import ru.schepin.hiberntate.model.User;
+import ru.schepin.hiberntate.model.Engine;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class app {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = null;
+
+        SessionFactory factory = null;
+
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-            Dao<Car, Integer> carDao = new CarDao(sessionFactory);
 
+            factory = new Configuration().configure().buildSessionFactory();
+            Dao<Engine, Integer> dao = new EngineDAO(factory);
 
-          //    save(carDao);
+            /**
+             * Раскоментируя интересующий метод помните что обращение к данным происходит по id.
+             * Убедитесь что данные для методов create update и delete существуют.
+             */
 
-//            Car car = carDao.getByKey(4);
-//            System.out.println(car);
-//
-//            car.getUser().setAge(33);
-//            carDao.update(car);
-//            System.out.println(carDao.getByKey(3));
-//            carDao.delete(car);
+//            read(dao);
 
+//            update(dao);
+
+//            delete(dao);
+
+            create(dao);
 
         } finally {
-            if (sessionFactory != null) {
-                sessionFactory.close();
+            if (factory != null) {
+                factory.close();
             }
         }
     }
 
+    private static void read(Dao<Engine, Integer> engineDao) {
+        final Engine result = engineDao.getByKey(1);
+        System.out.println("Read: " + result);
+    }
 
-    private static void save(Dao<Car, Integer> carDao) {
-        User user = new User();
-        user.setName("Schepin Dmitriy");
-        user.setAge(32);
-        user.setDate(new Date(1986, 8, 13));
-        user.setId(1);
+    private static void update(Dao<Engine, Integer> engineDao) {
+        final Engine result = engineDao.getByKey(1);
+        result.setCarMark("lada");
+        engineDao.update(result);
+        System.out.println("Updated: " + engineDao.getByKey(1));
+    }
 
-        Car mmcL200 = new Car();
-        mmcL200.setMarka("MMC");
-        mmcL200.setModel("L200");
+    private static void create(Dao<Engine, Integer> carDao) {
+        Engine engine = new Engine();
+        engine.setCarMark("test-mark");
+        engine.setPower(1000);
+        engine.setName("test-name");
 
-        Car skodaOctavia = new Car();
-        skodaOctavia.setMarka("Skoda");
-        skodaOctavia.setModel("Octavia");
+        Car car1 = new Car();
+        car1.setMark("test-mark");
+        car1.setCost(10);
 
-        mmcL200.setUser(user);
-        skodaOctavia.setUser(user);
+        Car car2 = new Car();
+        car2.setMark("test-mark");
+        car2.setCost(20);
 
-        carDao.save(skodaOctavia);
-        carDao.save(mmcL200);
+        Set<Car> cars = new HashSet<>();
+        cars.add(car1);
+        cars.add(car2);
+        engine.setCars(cars);
+
+        carDao.save(engine);
+    }
+
+
+    private static void delete(Dao<Engine, Integer> engineDao) {
+        Engine engine = engineDao.getByKey(1);
+        engineDao.delete(engine);
+        System.out.println(engineDao.getByKey(1));
     }
 }
